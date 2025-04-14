@@ -450,7 +450,7 @@
       try {
         buttonElem.textContent = "Sending Message...";
   
-        const response = await fetch(" http://localhost:5000/joinus", {
+        const response = await fetch("https://backend-for-ptwo.onrender.com/joinus", {
           method: "POST",
           body: formData
         });
