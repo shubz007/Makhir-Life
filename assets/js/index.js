@@ -43,7 +43,7 @@ Tags:
 
   blogPostSlider();
 
-  htmlFatchFrom();
+  // htmlFatchFrom();
 
   preloderOption();
 
@@ -901,155 +901,155 @@ Tags:
   /*=====================
       17 HTML Fatch From 
   =======================*/
-  function htmlFatchFrom() {
-    if ($('form').hasClass('message-form')) {
-      // Get the form.
-      const form = document.querySelector('.message-form');
+  // function htmlFatchFrom() {
+  //   if ($('form').hasClass('message-form')) {
+  //     // Get the form.
+  //     const form = document.querySelector('.message-form');
 
-      // Get the messages div.
-      const formMessage = document.querySelector('.message');
+  //     // Get the messages div.
+  //     const formMessage = document.querySelector('.message');
 
-      // Set up an event listener for the contact form.
-      form.addEventListener('submit', async (event) => {
-        // Stop the browser from submitting the form.
-        event.preventDefault();
+  //     // Set up an event listener for the contact form.
+  //     form.addEventListener('submit', async (event) => {
+  //       // Stop the browser from submitting the form.
+  //       event.preventDefault();
 
-        // Serialize the form data.
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData.entries());
-        const json = JSON.stringify(object);
-        // console.log(json);
+  //       // Serialize the form data.
+  //       const formData = new FormData(form);
+  //       const object = Object.fromEntries(formData.entries());
+  //       const json = JSON.stringify(object);
+  //       // console.log(json);
 
-        try {
-          $('#submit').text('Sending...');
-          $('#message').show();
-          const res = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            body: json,
-          });
-          if (res.status === 200) {
-            const json = await res.json();
-            // console.log(json);
-            formMessage.innerHTML = json.message;
+  //       try {
+  //         $('#submit').text('Sending...');
+  //         $('#message').show();
+  //         const res = await fetch('https://api.web3forms.com/submit', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             Accept: 'application/json',
+  //           },
+  //           body: json,
+  //         });
+  //         if (res.status === 200) {
+  //           const json = await res.json();
+  //           // console.log(json);
+  //           formMessage.innerHTML = json.message;
 
-            $('#message')
-              .delay(5000)
-              .slideUp(750, function () {
-                $('#message').hide();
-                $('#message').text('');
+  //           $('#message')
+  //             .delay(5000)
+  //             .slideUp(750, function () {
+  //               $('#message').hide();
+  //               $('#message').text('');
 
-                // remove disabled attribute from submit button
-                $('#submit').removeAttr('disabled');
+  //               // remove disabled attribute from submit button
+  //               $('#submit').removeAttr('disabled');
 
-                $('#submit').text('Send Message');
+  //               $('#submit').text('Send Message');
 
-                // reset form
-                form.reset();
-              });
-          } else {
-            const json = await res.json();
-            // console.error(json);
-            formMessage.innerHTML = json.message;
-            $('#message')
-              .delay(5000)
-              .slideUp(750, function () {
-                $('#message').hide();
-                $('#message').text('');
+  //               // reset form
+  //               form.reset();
+  //             });
+  //         } else {
+  //           const json = await res.json();
+  //           // console.error(json);
+  //           formMessage.innerHTML = json.message;
+  //           $('#message')
+  //             .delay(5000)
+  //             .slideUp(750, function () {
+  //               $('#message').hide();
+  //               $('#message').text('');
 
-                // remove disabled attribute from submit button
-                $('#submit').removeAttr('disabled');
+  //               // remove disabled attribute from submit button
+  //               $('#submit').removeAttr('disabled');
 
-                $('#submit').text('Send Message');
+  //               $('#submit').text('Send Message');
 
-                // reset form
-                form.reset();
-              });
-          }
-        } catch (error) {
-          // console.error('Error:', error);
-          formMessage.innerHTML = 'An error occurred. Please try again later.';
-          $('#message')
-            .delay(5000)
-            .slideUp(750, function () {
-              $('#message').hide();
-              $('#message').text('');
+  //               // reset form
+  //               form.reset();
+  //             });
+  //         }
+  //       } catch (error) {
+  //         // console.error('Error:', error);
+  //         formMessage.innerHTML = 'An error occurred. Please try again later.';
+  //         $('#message')
+  //           .delay(5000)
+  //           .slideUp(750, function () {
+  //             $('#message').hide();
+  //             $('#message').text('');
 
-              // remove disabled attribute from submit button
-              $('#submit').removeAttr('disabled');
+  //             // remove disabled attribute from submit button
+  //             $('#submit').removeAttr('disabled');
 
-              $('#submit').text('Send Message');
+  //             $('#submit').text('Send Message');
 
-              // reset form
-              form.reset();
-            });
-        }
+  //             // reset form
+  //             form.reset();
+  //           });
+  //       }
 
-        // Submit the form using Fetch.
-        // fetch(form.action, {
-        //   method: 'POST',
-        //   body: formData,
-        // })
-        //   .then((response) => response.text())
-        //   .then((responseText) => {
-        //     // Make sure that the formMessages div has the 'success' class.
-        //     formMessages.removeClass('error');
-        //     formMessages.addClass('success');
+  //       // Submit the form using Fetch.
+  //       // fetch(form.action, {
+  //       //   method: 'POST',
+  //       //   body: formData,
+  //       // })
+  //       //   .then((response) => response.text())
+  //       //   .then((responseText) => {
+  //       //     // Make sure that the formMessages div has the 'success' class.
+  //       //     formMessages.removeClass('error');
+  //       //     formMessages.addClass('success');
 
-        //     // Set the message text.
-        //     formMessages.text(responseText);
-        //     form.reset();
+  //       //     // Set the message text.
+  //       //     formMessages.text(responseText);
+  //       //     form.reset();
 
-        //     const timeline = anime.timeline();
-        //     timeline
-        //       .add({
-        //         targets: formMessages[0],
-        //         opacity: [0, 1],
-        //         translateY: [50, 0],
-        //         easing: 'easeInOutQuad',
-        //         duration: 400,
-        //       })
-        //       .add({
-        //         targets: formMessages[0],
-        //         opacity: [1, 0],
-        //         translateY: [0, -50],
-        //         easing: 'easeInOutQuad',
-        //         duration: 400,
-        //         delay: 6000,
-        //         complete: () => {
-        //           formMessages.empty();
-        //           formMessages.removeClass('success');
-        //         },
-        //       });
-        //   })
-        //   .catch((error) => {
-        //     const timeline = anime.timeline();
-        //     timeline.add({
-        //       targets: formMessages[0],
-        //       opacity: [0, 1],
-        //       translateY: [50, 0],
-        //       easing: 'easeInOutQuad',
-        //       duration: 400,
-        //     });
+  //       //     const timeline = anime.timeline();
+  //       //     timeline
+  //       //       .add({
+  //       //         targets: formMessages[0],
+  //       //         opacity: [0, 1],
+  //       //         translateY: [50, 0],
+  //       //         easing: 'easeInOutQuad',
+  //       //         duration: 400,
+  //       //       })
+  //       //       .add({
+  //       //         targets: formMessages[0],
+  //       //         opacity: [1, 0],
+  //       //         translateY: [0, -50],
+  //       //         easing: 'easeInOutQuad',
+  //       //         duration: 400,
+  //       //         delay: 6000,
+  //       //         complete: () => {
+  //       //           formMessages.empty();
+  //       //           formMessages.removeClass('success');
+  //       //         },
+  //       //       });
+  //       //   })
+  //       //   .catch((error) => {
+  //       //     const timeline = anime.timeline();
+  //       //     timeline.add({
+  //       //       targets: formMessages[0],
+  //       //       opacity: [0, 1],
+  //       //       translateY: [50, 0],
+  //       //       easing: 'easeInOutQuad',
+  //       //       duration: 400,
+  //       //     });
 
-        //     // Make sure that the formMessages div has the 'error' class.
-        //     formMessages.removeClass('success');
-        //     formMessages.addClass('error');
+  //       //     // Make sure that the formMessages div has the 'error' class.
+  //       //     formMessages.removeClass('success');
+  //       //     formMessages.addClass('error');
 
-        //     formMessages.text(
-        //       `${
-        //         error
-        //           ? error
-        //           : 'Oops! An error occurred and your message could not be sent.'
-        //       }`
-        //     );
-        //   });
-      });
-    }
-  }
+  //       //     formMessages.text(
+  //       //       `${
+  //       //         error
+  //       //           ? error
+  //       //           : 'Oops! An error occurred and your message could not be sent.'
+  //       //       }`
+  //       //     );
+  //       //   });
+  //     });
+  //   }
+  // }
 
   /*=====================
       18 Preloder Option

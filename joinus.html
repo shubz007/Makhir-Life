@@ -178,7 +178,7 @@
                 </div>
                 <div class="col-lg-6">
                 
-        <form enctype="multipart/form-data" method="POST"  class="message-form"  id="join-form">
+        <form enctype="multipart/form-data" method="POST"  class="message-form"  id="join-form" novalidate>
 
             <!-- <input type="hidden" name="access_key" value=""> -->
             <input type="hidden" name="website" id="website" value="Makhir.life" />
@@ -207,8 +207,8 @@
               </li>
               <li>
                 <h5>Join as </h5>
-              <select name="role" required>
-                <option value="" disabled selected>Select your role</option>
+              <select name="role" type="hidden" required>
+                <option value="" >Select your role</option>
                 <option value="Intern">Intern</option>
                 <option value="Associate">Associate</option>
                 <option value="Trainee">Trainee</option>
@@ -239,7 +239,7 @@
             <button type="submit" class="btn-anime v2" id="submit">
               send message
             </button>
-            <div id="successAlert" style="display: none; padding: 10px; background-color: #4CAF50; color: white; margin-top: 10px; text-align: center; border-radius: 5px;"></div>
+            <div id="successAlert" style="display: none; padding: 10px;  color: white; margin-top: 10px; text-align: center; border-radius: 5px;"></div>
           </form>
 
                 </div>
@@ -434,55 +434,52 @@
 
 <!-- Form handliing -->
 <script>
-    document.getElementById("join-form").addEventListener("submit", async function (event) {
-      event.preventDefault();
+  document.getElementById("join-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-     
+    const formElem = this;
+    const formData = new FormData(formElem);
+    console.log(formData.get("role")); // Correct way to access form value
 
+    const successAlert = document.getElementById("successAlert"); // Fixed ID
+    const buttonElem = formElem.querySelector("#submit");
 
-  
-      const formElem = this;
-      const formData = new FormData(formElem);
-      console.log(formData.role);
-      const successAlert = document.getElementById("message");
-      const buttonElem = formElem.querySelector("#submit");
-  
-      try {
-        buttonElem.textContent = "Sending Message...";
-  
-        const response = await fetch("https://backend-for-ptwo.onrender.com/joinus", {
-          method: "POST",
-          body: formData
-        });
-  
-        const result = await response.json();
-  
-        if (response.ok) {
-          successAlert.innerText = result.message || "Your response has been noted!";
-          successAlert.style.color = "#4CAF50"; 
-          successAlert.style.display = "block";
-  
-          formElem.reset();
-          buttonElem.textContent = "Send Message";
-  
-          setTimeout(() => {
-            successAlert.style.display = "none";
-          }, 3000);
-        } else {
-          throw new Error(result.error || "Submission failed");
-        }
-      } catch (error) {
-        successAlert.innerText = error.message;
-        successAlert.style.color = "#f44336";
+    try {
+      buttonElem.textContent = "Sending Message...";
+
+      const response = await fetch("https://backend-for-ptwo.onrender.com/joinus", {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        successAlert.innerText =  "Your response has been noted!";
+        successAlert.style.color = "#4CAF50";
         successAlert.style.display = "block";
-  
+
+        formElem.reset();
+        buttonElem.textContent = "Send Message";
+
         setTimeout(() => {
           successAlert.style.display = "none";
-        }, 5000);
+        }, 3000);
+      } else {
+        throw new Error(result.error || "Submission failed");
       }
-    });
-  </script>
-  
+    } catch (error) {
+      successAlert.innerText = error.message;
+      successAlert.style.color = "#f44336";
+      successAlert.style.display = "block";
+
+      setTimeout(() => {
+        successAlert.style.display = "none";
+      }, 5000);
+    }
+  });
+</script>
+
 
 <!-- form handling -->
 
